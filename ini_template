@@ -1,0 +1,9 @@
+[lastfm]
+api_key =
+shared_secret =
+
+[mysql]
+host = db
+username = root
+password = secret
+db = lastfmcache
