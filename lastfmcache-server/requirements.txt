@@ -1,4 +1,4 @@
 Flask>=1.1.2
 Flask-Injector>=0.12.3
-lastfmcache>=1.1.0
+lastfmcache>=1.2.0
 PyMySQL==0.9.3
