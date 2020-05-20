@@ -1,3 +1,4 @@
+import logging
 import sys
 from configparser import ConfigParser
 
@@ -22,6 +23,7 @@ def configure(binder):
     binder.bind(LastfmCache, to=init_lastfmcache, scope=singleton)
 
 def main():
+    enable_logging()
     app = Flask(__name__)
     app.register_blueprint(api_v1, url_prefix='/lastfmcache/api/v1')
 
@@ -32,5 +34,14 @@ def main():
 def init():
     if __name__ == "__main__":
         sys.exit(main())
+
+def enable_logging():
+    logging.basicConfig(
+        level=logging.ERROR,
+        format="%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s",
+        handlers=[
+            logging.FileHandler("error.log"),
+            logging.StreamHandler()
+        ])
 
 init()
