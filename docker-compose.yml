@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  mysql:
+    image: percona/percona-server:latest
+    container_name: lastfmcache-mysql
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: secret
+    command:
+      - '--user=mysql'
+    volumes:
+      - ./mysql/mysql-data:/var/lib/mysql-data
+      - ./mysql/mysql-innodb-logs:/var/lib/mysql-innodb-logs
+      - ./mysql/logs:/var/log/mysql
+      - ./mysql/my.cnf-dev-win:/etc/my.cnf
+
+  lastfmcache-server:
+    image: lastfmcache-server:1.0.0
+    hostname: lastfmcache-server
+    container_name: lastfmcache-server
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./lastfmcache-server:/app
+
+    entrypoint: uwsgi -j /app/uwsgi.json

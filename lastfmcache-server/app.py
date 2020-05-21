@@ -22,18 +22,18 @@ def configure(binder):
     binder.bind(ConfigParser, to=load_config, scope=singleton)
     binder.bind(LastfmCache, to=init_lastfmcache, scope=singleton)
 
-def main():
+def init_app():
     enable_logging()
     app = Flask(__name__)
     app.register_blueprint(api_v1, url_prefix='/lastfmcache/api/v1')
 
     FlaskInjector(app=app, modules=[configure])
 
-    app.run()
+    return app
 
-def init():
-    if __name__ == "__main__":
-        sys.exit(main())
+def main():
+    app = init_app()
+    app.run()
 
 def enable_logging():
     logging.basicConfig(
@@ -43,5 +43,9 @@ def enable_logging():
             logging.FileHandler("error.log"),
             logging.StreamHandler()
         ])
+
+def init():
+    if __name__ == "__main__":
+        sys.exit(main())
 
 init()

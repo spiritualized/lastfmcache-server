@@ -1,4 +1,6 @@
 Flask>=1.1.2
 Flask-Injector>=0.12.3
-lastfmcache>=1.2.0
+jsonpickle>=1.4.1
+lastfmcache>=1.2.1
 PyMySQL==0.9.3
+unidecode>=1.1.1

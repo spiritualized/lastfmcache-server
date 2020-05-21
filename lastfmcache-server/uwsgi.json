@@ -1,0 +1,14 @@
+{
+    "uwsgi": {
+        "http-socket": ":5000",
+        "plugin": "python3",
+        "home": "/venv",
+        "chdir": "/app",
+        "module": "wsgi",
+        "callable": "app",
+        "master": true,
+        "processes": 2,
+        "vacuum": true,
+        "die-on-term": true
+    }
+}
