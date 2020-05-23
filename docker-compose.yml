@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 services:
   mysql:
     image: percona/percona-server:latest
@@ -12,7 +12,7 @@ services:
       - ./mysql/mysql-data:/var/lib/mysql-data
       - ./mysql/mysql-innodb-logs:/var/lib/mysql-innodb-logs
       - ./mysql/logs:/var/log/mysql
-      - ./mysql/my.cnf-dev-win:/etc/my.cnf
+      - ./mysql/my.cnf-dev-win:/etc/my.cnf.d/lastfmcache.cnf
 
   lastfmcache-server:
     image: lastfmcache-server:1.0.0
